@@ -19,21 +19,42 @@ TicTacToeBoard::TicTacToeBoard()
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
-  return Invalid;
+  if(turn == 'X') {
+    turn = O;
+  }
+  else if(turn == 'O') {
+    turn = X;
+  }
+
+  return turn;
 }
 
 /**
  * Places the piece of the current turn on the board, returns what
- * piece is placed, and toggles which Piece's turn it is. placePiece does 
+ * piece is placed, and toggles which Piece's turn it is. placePiece does
  * NOT allow to place a piece in a location where there is already a piece.
- * In that case, placePiece just returns what is already at that location. 
+ * In that case, placePiece just returns what is already at that location.
  * Out of bounds coordinates return the Piece Invalid value. When the game
  * is over, no more pieces can be placed so attempting to place a piece
  * should neither change the board nor change whose turn it is.
-**/ 
+**/
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-  return Invalid;
+  // Places the piece on the spot if it is not empty
+  if(board[row][column] == Blank && row < 3 && column < 3) {
+    board[row][column] = turn;
+    return turn;
+  }
+
+  // Just return the piece if the spot is already occupied
+  else if(board[row][column] != Blank && row < 3 && column < 3) {
+    return board[row][column];
+  }
+
+  // Occurs if coordinates is out of bounds
+  else {
+    return Invalid;
+  }
 }
 
 /**
@@ -42,7 +63,20 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
-  return Invalid;
+  // Places the piece on the spot if it is not empty
+  if(board[row][column] == Blank && row < 3 && column < 3) {
+    return Blank;
+  }
+
+  // Just return the piece if the spot is already occupied
+  else if(board[row][column] != Blank && row < 3 && column < 3) {
+    return board[row][column];
+  }
+
+  // Occurs if coordinates is out of bounds
+  else {
+    return Invalid;
+  }
 }
 
 /**
@@ -51,5 +85,7 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
+  // todo
+
   return Invalid;
 }
